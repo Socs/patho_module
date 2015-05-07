@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Patho Explorer Admin functions and UI
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function pathoExplorerAdmin_menu() {
+  // Set up custom user page and add link to user tabs
+  $items['user/%user/patho'] = array(
+    'title' => t('List of Patients'),
+    'page callback' => 'pathoExplorerAdmin_patients',
+    'access callback' => 'user_edit_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'pathoExplorerAdmin.page.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme.
+ */
+function pathoExplorerAdmin_theme() {
+  return array(
+    'pathoExplorerAdmin_patients' => array(
+      // Set variables for template
+      'variables' => array(
+        'patients' => NULL
+      ),
+      // Register tpl file
+      'template' => 'pathoExplorerAdmin_patients',
+    ),
+  );
+}
+
+/**
+ * pathoExplorerAdmin_menu page callback.
+ */
+function pathoExplorerAdmin_patients() {
+  // Add module js and css
+  $module_path = drupal_get_path('module', 'pathoExplorerAdmin');
+  drupal_add_js($module_path . '/js/pathoExplorerAdmin.js');
+  drupal_add_css($module_path . '/css/pathoExplorerAdmin.css');
+
+  // Add js from drupal core
+  drupal_add_library('system', 'ui.sortable');
+
+  // Get API info and pass to template
+  $patients = getPatients();
+  return theme('pathoExplorerAdmin_patients', array('patients' => $patients));
+}
+
+/**
+ * Implements hook_user_view().
+ */
+function pathoExplorerAdmin_user_view($account, $view_mode, $langcode) {
+  // Add a row on the main user page for summary information
+  module_load_include('inc', 'pathoExplorerAdmin', 'pathoExplorerAdmin.page');
+  $space = getSpace();
+  $percentUsed = $space['percentUsed'];
+  $spaceLeft = $space['spaceLeft'];
+  // Row header
+  $account->content['accountPatho'] =  array(
+    '#type' => 'user_profile_category',
+    '#title' => t('Patho Account'),
+    '#markup' => '',
+    '#attributes' => array('class' => array('patho-information', 'clearfix')),
+    '#weight' => -10,
+  );
+  // Row content
+  $account->content['accountPatho']['space'] = array(
+    '#type' => 'user_profile_item',
+    '#title' => '',
+    '#markup' => t('@spaceLeftMB <span>available</span>', array('@spaceLeft' => $spaceLeft)),
+    '#attributes' => array('class' => array('patho-information-item, patho-space-left'))
+  );
+  // Row content
+  $account->content['accountPatho']['graph'] = array(
+    '#type' => 'user_profile_item',
+    '#title' => '',
+    '#markup' => t('<div style="width: @percentUsed%"></div><span style="margin-left: calc(@percentUsed% - 44px);">@percentUsed% used</span>', array('@percentUsed' => $percentUsed)),
+    '#attributes' => array('class' => array('patho-information-item', 'patho-space-graph'))
+  );
+}

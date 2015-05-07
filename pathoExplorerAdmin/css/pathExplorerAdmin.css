@@ -1,0 +1,168 @@
+/* Patho Admin Module */
+
+.patho-information {
+  margin-bottom: 35px;
+}
+
+.patho-information li {
+  list-style: none;
+}
+
+
+div.patho-space-left {
+  font-size: 28px;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: -15px;
+}
+
+div.patho-space-left span {
+  font-size: 14px;
+}
+
+
+div.patho-space-graph {
+  width: 50%;
+  background: #BDBDBC;
+  position: relative;
+}
+
+div.patho-space-graph > div {
+  background-color: #64C59A;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.5) 5px, rgba(255, 255, 255, 0.5) 10px);
+  height: 20px;
+}
+
+div.patho-space-graph > span {
+  position: absolute;
+  padding: 3px 7px;
+  width: 72px;
+  text-align: center;
+  border: 1px solid #CCC;
+  background: #FFF;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity .3s ease-out;
+}
+
+div.patho-space-graph > span:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: -23px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 10px 10px 10px 10px;
+  border-color: transparent transparent #FFF transparent;
+  border-style: solid;
+  margin: 3px auto 0;
+}
+
+div.patho-space-graph:hover > span {
+  opacity: 1;
+}
+
+
+.page-user-patho .patient .accordion-toggle {
+  background-color: #ECECEC;
+  padding: 7px 20px;
+  border-bottom: 1px solid #DEDEDE;
+  box-shadow: 0 1px 0 #C3C3C3;
+  margin-bottom: 1px;
+  color: #9A9A9A;
+  position: relative;
+}
+
+.page-user-patho .patient .accordion-toggle:hover, .page-user-patho .patient .accordion-toggle.open {
+  background-color: #DADADA;
+}
+
+.page-user-patho .patient .accordion-toggle:after {
+  content: '>';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  margin: auto;
+  display: block;
+  line-height: 1em;
+  height: 1em;
+  font-size: 42px;
+  transition: all .3s ease-in;
+}
+
+.page-user-patho .patient .accordion-toggle.open:after {
+  transform: rotate(90deg);
+}
+
+.page-user-patho .patient h2 {
+  color: #0B374F;
+  font-weight: normal;
+  margin-bottom: 2px;
+}
+
+.page-user-patho .patient p {
+  margin-bottom: 0;
+}
+
+.page-user-patho .patient h3 {
+  color: #fff;
+  background-color: #0B374F;
+  text-transform: uppercase;
+  padding: 2px 20px;
+  margin-bottom: 10px;
+}
+
+.page-user-patho .patient .accordion-content {
+  background-color: #E7E7E7;
+  padding: 5px 20px;
+  border-bottom: 1px solid #C3C3C3;
+}
+
+.page-user-patho .patient .card {
+  background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(100, 100, 100, 0.8);
+  padding: 2px 20px 0;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.page-user-patho .patient .card .image-wrapper {
+  margin-left: 0;
+}
+
+.page-user-patho .patient .card .image-wrapper li {
+  list-style: none;
+  float: left;
+  margin-right: 20px;
+  margin-left: 0;
+  margin-bottom: 20px;
+  cursor: move;
+  background-color: #ccc;
+}
+
+.page-user-patho .patient .card .image-wrapper .ui-state-highlight {
+  width: 202px;
+  height: 152px;
+  background: rgba(100, 197, 154, 0.5);
+  border: 2px dotted #64C59A;
+}
+
+.page-user-patho .patient .card img {
+  border: 1px solid #F2F1EE;
+}
+
+.page-user-patho .patient h4 {
+  color: #ACACAC;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.accordion-toggle {
+  cursor: pointer;
+}
+
+.accordion-content {
+  display: none;
+}

@@ -1,0 +1,5 @@
+name = pathoExplorerAdmin
+description = Patho Explorer Admin functions and UI
+core = 7.x
+package = Vibdev
+version = 0.1
